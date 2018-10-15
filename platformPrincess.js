@@ -70,10 +70,10 @@ class Princess extends Sprite {
         this.speed = this.speedWhenWalking;
     }
     handleGameLoop() {
-        if (this.angle === 0 || this.speed > 0) {
+        if (this.angle === 0 && this.speed > 0) {
             this.playAnimation("right");
         }
-        if (this.angle === 180 || this.speed > 0) {
+        if (this.angle === 180 && this.speed > 0) {
             this.playAnimation("left");
         }
         this.x = Math.max(5, this.x);
@@ -86,6 +86,48 @@ class Princess extends Sprite {
             this.y = this.y + 4;
         }
     }
+    handleSpacebar() {
+        if (!this.isFalling) {
+            this.y = this.y - 1.25 * this.height; // jump
+        }
+    }
+    handleBoundaryContact() {
+        game.end('Princess Ann has drowned.\n\nBetter luck next time.')
+    }
 }
 
 let ann = new Princess;
+
+class Door extends Sprite {
+    constructor() {
+        super();
+        this.setImage("door.png");
+        this.x = game.displayWidth - 48;
+        this.y = finishPlatform.y - 2 * 48;
+        this.accelerateOnBounce = false;
+    }
+    handleCollision(otherSprite) {
+        if (otherSprite === ann) {
+            game.end('Congratulations!\n\nPrincess Ann can now pursue the\nstranger deeper into the castle!');
+        }
+    }
+}
+
+let exit = new Door;
+
+class Spider extends Sprite {
+    constructor(x, y) {
+        super();
+        this.name = "evil spider";
+        this.setImage("spider.png");
+        this.x = x;
+        this.y = y;
+        this.speed = 48;
+        this.accelerateOnBounce = false;
+        this.defineAnimation("creep", 0, 2);
+        this.playAnimation("creep", this.creep.repeat);
+
+    }
+}
+new Spider(200, 225);
+new Spider(550, 200);
