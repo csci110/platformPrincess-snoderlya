@@ -66,7 +66,7 @@ class Princess extends Sprite {
     }
     handleRightArrowKey() {
         this.playAnimation("right");
-        this.angel = 0;
+        this.angle = 0;
         this.speed = this.speedWhenWalking;
     }
     handleGameLoop() {
