@@ -37,9 +37,9 @@ class Slider extends tile {
 
 }
 
-new Slider(100, 320, 270, 48);
-new Slider(150, 300, 90, 48);
-new Slider(225, 250, 270, 48);
+new Slider(100, 320, 270,25);
+new Slider(150, 300, 90, 20);
+new Slider(225, 250, 270, 10);
 new Slider(300, 300, 180, 48);
 new Slider(game.displayWidth - 48 * 2, 305, 0, 48);
 
@@ -82,12 +82,10 @@ class Princess extends Sprite {
     }
     handleSpacebar() {
         if (!this.isFalling) {
-            this.y = this.y - 1.25 * this.height;
+            this.y = this.y - 2.00 * this.height;
         }
     }
-    handleBoundaryContact() {
-        game.end('Princess Ann has drowned.\n\nBetter luck next time.')
-    }
+    
 }
 
 
@@ -100,5 +98,8 @@ class Block extends Sprite {
         this.x =48*2;
         this.y =200;
         this.accelerateOnBounce = false;
+    }
+    handleBoundaryContact() {
+        game.end('Princess Ann has drowned.\n\nBetter luck next time.')
     }
 }
