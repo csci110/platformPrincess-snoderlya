@@ -92,3 +92,13 @@ class Princess extends Sprite {
 
 
 let ann = new Princess;
+
+class Block extends Sprite {
+    constructor(){
+        super();
+        this.setImage("Crate.png");
+        this.x =48*2;
+        this.y =200;
+        this.accelerateOnBounce = false;
+    }
+}
